@@ -1,0 +1,45 @@
+body {
+  background-color: #1f2225;
+}
+
+.navbar {
+  overflow: hidden;
+  background-color: #2f3338;
+  align-items: center;
+  height: 46px;
+}
+
+
+.menu {
+  float: right;
+  display: block;
+  color: #f2f2f2;
+  padding: 14px 36px;
+  text-decoration: none;
+}
+
+.navbar a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.logo {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  max-height: 36px;
+  width: auto;
+  padding: 5px 16px;
+  text-decoration: none;
+}
+
+h1 {
+  color: #e0e0e0;
+  font-size: 28px;
+  text-align: center;
+}
+
+p {
+  color: #e0e0e0;
+  font-size: 18px;
+}
