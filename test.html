@@ -8,10 +8,37 @@
 </head>
 <body>
 	<script>
-		var NavWidth = innerWidth;
-		var NavHeight = innerHeight;
-		alert(NavWidth + 'x' + NavHeight)
+		var page_counter = 0;
+		var xhr = new XMLHttpRequest();
+		xhr.open('GET', 'questions.txt', false);
+		xhr.onreadystatechange=function(){
+			if (xhr.readtstate===4 && xhr.status===200){
+				const text = xhr.responseText;
+			};
+		};
+		xhr.send()
+		const lines = text.split('\n')
+		function get_ids(){
+			var elements = document.getElementsByClassName('question');
+			for (var i = 0; i < elements.length; i++){
+				console.log('Element:', elements[i], 'ID:', elements[i].id );
+			};
+		}
+		function answer(to, self){
+			var question = document.getElementById(to);
+			var answers = document.getElementsByClassName('answer');
+			id = Math.floor(self.id[self.id.length-1]/3);
+			var answers = Array.from(answers)
+			var answers = answers.slice(3*id,3*(id+1));
+			question.dataset.answer = self.textContent;
+			console.log(self.textContent);
+			for(var i=0;i<answers.length;i++){
+				answers[i].classList.remove('clicked');
+			};
+			self.classList.add('clicked');
+		}
 	</script>
+	<script src="script.js" defer></script>
 	<div class='esi-div'>
 		<p class='esi-title'>V o F</p>
 		<div class='decor'>
@@ -22,34 +49,41 @@
 		</div>
 	</div>
 	<div class='questions'>
-		<div class='question'>
-			La teoría de la relatividad, desarrollada por Albert Einstein, propone que las leyes de la física son las mismas para todos los observadores, independientemente de su velocidad relativa.
+		<div class='question' data-answer="No sé">
+			a
 		</div>
 		<div class='answer_buttons'>
-			<button class='answer'>V</button>
-			<button class='answer'>No sé</button>
-			<button class='answer'>F</button>
+			<button type='button' class='answer' id="answer-0" onclick="answer('question-0', this)">V</button>
+			<button type='button' class='answer' id="answer-1" onclick="answer('question-0', this)">No sé</button>
+			<button type='button' class='answer' id="answer-2" onclick="answer('question-0', this)">F</button>
 		</div>
-		<div class='question'>
-			La Revolución Industrial fue un período de transformación económica y social que ocurrió aproximadamente entre los siglos XVIII y XIX.
-		</div>
-		<div class='answer_buttons'>
-			<button class='answer'>V</button>
-			<button class='answer'>No sé</button>
-			<button class='answer'>F</button>
-		</div>
-		<div class='question'>
-			La Segunda Guerra Mundial fue un conflicto global que tuvo lugar entre 1939 y 1945. Involucró a muchas naciones y se libró en varios frentes, incluyendo Europa, el Pacífico y África. Fue un conflicto devastador que tuvo un impacto significativo en la historia del siglo XX.
+		<div class='question' data-answer="No sé">
+		a
 		</div>
 		<div class='answer_buttons'>
-			<button class='answer'>V</button>
-			<button class='answer'>No sé</button>
-			<button class='answer'>F</button>
+			<button type='button' class='answer' id="answer-3" onclick="answer('question-1', this)">V</button>
+			<button type='button' class='answer' id="answer-4" onclick="answer('question-1', this)">No sé</button>
+			<button type='button' class='answer' id="answer-5" onclick="answer('question-1', this)">F</button>
+		</div>
+		<div class='question' data-answer="No sé">
+			a
+		</div>
+		<div class='answer_buttons'>
+			<button type='button' class='answer' id="answer-6" onclick="answer('question-2', this)">V</button>
+			<button type='button' class='answer' id="answer-7" onclick="answer('question-2', this)">No sé</button>
+			<button type='button' class='answer' id="answer-8" onclick="answer('question-2', this)">F</button>
 		</div>
 	</div>
 	<div class='button'>
-		<button class='next_button'>Siguiente</button>
+		<button class='next_button' onclick="next()">Siguiente</button>
 	</div>
-	</div>
+	<script>
+		var elements = document.getElementsByClassName('question');
+		var element_counter = elements.length;
+		for (var i=0;i<element_counter;i++){
+			elements[i].textContent = lines[i + 3 * page_counter]
+			elements[i].id = 'question-' + i;
+		};
+	</script>
 </body>
 </html>

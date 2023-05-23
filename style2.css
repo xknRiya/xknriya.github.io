@@ -3,10 +3,6 @@ html, body {
 	margin: 0px 0px;
 }
 
-div {
-	font-size:50%;
-}
-
 .esi-div {
 	position: absolute;
 	display: flex;
@@ -15,7 +11,6 @@ div {
 	justify-content: center;
 	top:5%;
 	font-family: 'helvetica';
-	font-size: 64px;
 	font-weight: bold;
 	width: 100%;
 	height: 1em;
@@ -92,7 +87,6 @@ div {
 }
 
 .question{
-	font-size: 18px;
 	position: relative;
 	display: flex;
 	flex-direction: center;
@@ -111,11 +105,15 @@ div {
 }
 
 .answer{
-	font-size: 12px;
 	padding: 15px;
 	border: 0px;
 	margin: 5px 2%;
 	background-color: #78B159;
+}
+
+.answer.clicked{
+	background-color: #50773b;
+	border: #00A651;
 }
 
 .button{
@@ -132,11 +130,7 @@ div {
 .next_button {
 	position: absolute;
 	bottom: 0px;
-
-	/* font-family: 'Segoe UI Light';
-	*/
-	font-family: 'Roboto Condensed', 'Calibri Light';
-	font-size: 32px;
+	font-family: 'Open Sans', 'Roboto Condensed', 'Segoe UI Light', 'Calibri Light';
 	text-align: center;
 	height: 1.5em;
 	background-image: linear-gradient(to left, #8DC63F, #00A651);
@@ -144,4 +138,40 @@ div {
 	border-radius: 10em;
 	padding: 0px 20px;
 	padding-bottom: 5px;
+}
+
+@media only screen and (max-height: 1000px){
+	div{
+		font-size: 50%;
+	}
+	.esi-div{
+		font-size: 64px;
+	}
+	.question{
+		font-size: 18px;
+	}
+	.answer{
+		font-size: 12px;
+	}
+	.next_button{
+		font-size: 32px;
+	}
+}
+
+@media only screen and (min-height: 1001px){
+	div{
+		font-size: 50%;
+	}
+	.esi-div{
+		font-size: 64px;
+	}
+	.question{
+		font-size: 18px;
+	}
+	.answer{
+		font-size: 12px;
+	}
+	.next_button{
+		font-size: 32px;
+	}
 }
