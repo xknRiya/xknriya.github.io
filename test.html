@@ -10,18 +10,21 @@
 	<script>
 		var page_counter = 0;
 		var text;
-		var all_answers;
+		var data = [];
 		var xhr = new XMLHttpRequest();
 		var question_elements = document.getElementsByClassName('question');
 
+		var age = localStorage.getItem('age')
+		var gen = localStorage.getItem('gen')
+
+		data.push(age)
+		data.push(gen)
 
 		xhr.open('GET', 'questions.txt', false);
 		xhr.onreadystatechange=function(){
 			if (xhr.readyState===4 && xhr.status===200){
 				text = xhr.responseText;
-				console.log(xhr.responseText, 1);
 			};
-			console.log(2)
 		};
 		xhr.send();
 		var lines = text.split('\n');
@@ -41,7 +44,7 @@
 			if (page_counter + 1<=Math.floor(lines.length/3)-1){
 				clean();
 				for(var i=0;i<question_elements.length;i++){
-					console.log(question_elements[i].dataset.answer);
+					data.push(question_elements[i].dataset.answer)
 					question_elements[i].dataset.answer='';
 				};
 				page_counter++
@@ -80,7 +83,7 @@
 	</div>
 	<div class='questions'>
 		<div class='question' data-answer="">
-			a
+			No deberías de estar viendo esto.
 		</div>
 		<div class='answer_buttons'>
 			<button type='button' class='answer' id="answer-0" onclick="answer('question-0', this)">V</button>
@@ -88,7 +91,7 @@
 			<button type='button' class='answer' id="answer-2" onclick="answer('question-0', this)">F</button>
 		</div>
 		<div class='question' data-answer="">
-			a
+			No deberías de estar viendo esto.
 		</div>
 		<div class='answer_buttons'>
 			<button type='button' class='answer' id="answer-3" onclick="answer('question-1', this)">V</button>
@@ -96,7 +99,7 @@
 			<button type='button' class='answer' id="answer-5" onclick="answer('question-1', this)">F</button>
 		</div>
 		<div class='question' data-answer="">
-			a
+			No deberías de estar viendo esto.
 		</div>
 		<div class='answer_buttons'>
 			<button type='button' class='answer' id="answer-6" onclick="answer('question-2', this)">V</button>

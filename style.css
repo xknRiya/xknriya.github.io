@@ -1,3 +1,13 @@
+@font-face {
+	font-family: 'Roboto Condensed';
+	src: url('RobotoCondensed-Light.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: 'Open Sans';
+	src: url('OpenSans-Light.ttf') format('truetype');
+}
+
 html, body {
 	height: 100%;
 	margin: 0px 0px;
@@ -12,7 +22,7 @@ body {
 
 
 .esi-div {
-	font-family: 'helvetica';
+	font-family: 'Roboto Condensed';
 	font-size: 64px;
 	font-weight: bold;
 	display: flex;
@@ -28,7 +38,7 @@ body {
 }
 
 .esi-last-div {
-	font-family: 'Segoe UI';
+	font-family: 'Roboto Condensed';
 	font-size: 48px;
 	font-weight: bold;
 	padding-bottom: 20%;
@@ -53,7 +63,7 @@ button, input {
 	position: relative;
 	/* font-family: 'Segoe UI Light';
 	*/
-	font-family: 'Roboto Condensed', 'Calibri Light';
+	font-family: 'Calibri Light';
 	font-size: 48px;
 	width: 6em;
 	height: 1.5em;
@@ -62,6 +72,14 @@ button, input {
 	border-radius: 10em;
 	padding: 0px 20px;
 	padding-bottom: 5px;
+}
+input{
+	margin: 20px;
+	text-align: center;
+}
+
+.age.incorrect, .gen.incorrect{
+	border: 2px solid #f00;
 }
 
 .top-left::before {
@@ -117,5 +135,8 @@ button, input {
 }
 
 p {
+  font-family: 'Roboto Condensed';
   text-align: center;
+  padding: 0px;
+  margin: 0px;
 }

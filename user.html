@@ -13,11 +13,11 @@
 	</div>
 	<div class="inputs">
         <p>Edad</p>
-		<input type='text'></button>
+		<input class="age" type='text' id="age" placeholder="-"></button>
         <p>Género</p>
-        <input type='input'></button>
+        <input class="gen" type='text' id="gen" placeholder="-"></button>
 	</div>
-    <button type="button">COMENZAR</button>
+    <button id="continue_button" type="button" onclick="_continue()" disabled>Continuar</button>
 	<div>
 		<div class='bottom-bottom'>
 			<p></p>
@@ -26,5 +26,37 @@
 			<p></p>
 		</div>
 	</div>
+    <script>
+        var age = document.getElementById('age');
+        var gen = document.getElementById('gen');
+        var continue_button = document.getElementById('continue_button');
+        
+        age.addEventListener('input', checkInputs);
+        gen.addEventListener('input', checkInputs);
+
+
+        function checkInputs(){
+            if(!isNaN(age.value) && isNaN(gen.value) && age.value.trim() !== '' && gen.value.trim() !== '') {
+                continue_button.disabled = false;
+            } else {
+                continue_button.disabled = true;
+                if (isNaN(age.value) && age.value.trim() !== ''){
+                    age.classList.add('incorrect');
+                } else {
+                    age.classList.remove('incorrect');
+                };
+                if (!isNaN(gen.value) && gen.value.trim() !== ''){
+                    gen.classList.add('incorrect');
+                } else {
+                    gen.classList.remove('incorrect');
+                };
+            };
+        };
+        function _continue(){
+            localStorage.setItem(age.id, age.value);
+            localStorage.setItem(gen.id, gen.value);
+            window.location.replace('test.html');
+        }
+    </script>
 </body>
 </html>
