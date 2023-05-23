@@ -9,21 +9,52 @@
 <body>
 	<script>
 		var page_counter = 0;
+		var text;
+		var all_answers;
 		var xhr = new XMLHttpRequest();
+		var question_elements = document.getElementsByClassName('question');
+
+
 		xhr.open('GET', 'questions.txt', false);
 		xhr.onreadystatechange=function(){
-			if (xhr.readtstate===4 && xhr.status===200){
-				const text = xhr.responseText;
+			if (xhr.readyState===4 && xhr.status===200){
+				text = xhr.responseText;
+				console.log(xhr.responseText, 1);
+			};
+			console.log(2)
+		};
+		xhr.send();
+		var lines = text.split('\n');
+		function get_ids(){
+			for (var i = 0; i < question_elements.length; i++){
+				console.log('Element:', question_elements[i], 'ID:', question_elements[i].id );
 			};
 		};
-		xhr.send()
-		const lines = text.split('\n')
-		function get_ids(){
-			var elements = document.getElementsByClassName('question');
-			for (var i = 0; i < elements.length; i++){
-				console.log('Element:', elements[i], 'ID:', elements[i].id );
+		function clean(){
+			var answers = document.getElementsByClassName('answer');
+			var answers = Array.from(answers)
+			for(var i=0;i<answers.length;i++){
+				answers[i].classList.remove('clicked');
 			};
 		}
+		function next(self){
+			if (page_counter + 1<=Math.floor(lines.length/3)-1){
+				clean();
+				for(var i=0;i<question_elements.length;i++){
+					console.log(question_elements[i].dataset.answer);
+					question_elements[i].dataset.answer='';
+				};
+				page_counter++
+				for (var i=0;i<question_elements.length;i++){
+				question_elements[i].textContent = lines[i + 3 * page_counter]
+				};
+				if (page_counter === Math.floor(lines.length/3) - 1){
+					self.textContent='Finalizar';
+				};
+			}else{
+				window.location.replace('index.html')
+			};
+		};
 		function answer(to, self){
 			var question = document.getElementById(to);
 			var answers = document.getElementsByClassName('answer');
@@ -38,7 +69,6 @@
 			self.classList.add('clicked');
 		}
 	</script>
-	<script src="script.js" defer></script>
 	<div class='esi-div'>
 		<p class='esi-title'>V o F</p>
 		<div class='decor'>
@@ -49,7 +79,7 @@
 		</div>
 	</div>
 	<div class='questions'>
-		<div class='question' data-answer="No sé">
+		<div class='question' data-answer="">
 			a
 		</div>
 		<div class='answer_buttons'>
@@ -57,15 +87,15 @@
 			<button type='button' class='answer' id="answer-1" onclick="answer('question-0', this)">No sé</button>
 			<button type='button' class='answer' id="answer-2" onclick="answer('question-0', this)">F</button>
 		</div>
-		<div class='question' data-answer="No sé">
-		a
+		<div class='question' data-answer="">
+			a
 		</div>
 		<div class='answer_buttons'>
 			<button type='button' class='answer' id="answer-3" onclick="answer('question-1', this)">V</button>
 			<button type='button' class='answer' id="answer-4" onclick="answer('question-1', this)">No sé</button>
 			<button type='button' class='answer' id="answer-5" onclick="answer('question-1', this)">F</button>
 		</div>
-		<div class='question' data-answer="No sé">
+		<div class='question' data-answer="">
 			a
 		</div>
 		<div class='answer_buttons'>
@@ -75,14 +105,12 @@
 		</div>
 	</div>
 	<div class='button'>
-		<button class='next_button' onclick="next()">Siguiente</button>
+		<button class='next_button' onclick="next(this)">Siguiente</button>
 	</div>
 	<script>
-		var elements = document.getElementsByClassName('question');
-		var element_counter = elements.length;
-		for (var i=0;i<element_counter;i++){
-			elements[i].textContent = lines[i + 3 * page_counter]
-			elements[i].id = 'question-' + i;
+		for (var i=0;i<question_elements.length;i++){
+			question_elements[i].textContent = lines[i + 3 * page_counter]
+			question_elements[i].id = 'question-' + i;
 		};
 	</script>
 </body>
